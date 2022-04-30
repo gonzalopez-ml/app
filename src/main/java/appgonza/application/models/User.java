@@ -1,11 +1,11 @@
 package appgonza.application.models;
 
-import com.mongodb.lang.NonNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigInteger;
 
 @Data //getter y setter
 @NoArgsConstructor
@@ -13,16 +13,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
 
-    @Id
-    @NonNull
-    private String _id;
-
+    private BigInteger id;
     private String name;
     private String lastName;
     private String dni;
-    private String telefono;
+    private String phoneNumber;
     private String email;
     private String user;
     private String pass;
-
 }

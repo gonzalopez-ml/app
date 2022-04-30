@@ -1,6 +1,7 @@
 package appgonza.application.controllers;
 
 import appgonza.application.dtos.ErrorDto;
+import appgonza.application.exceptions.UserAlReadyExistInDb;
 import appgonza.application.exceptions.UsersNotFoundInDbException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,11 @@ public class ControllerAdvice {
     public ResponseEntity<ErrorDto> UsersNotFoundInDbException(UsersNotFoundInDbException e) {
         ErrorDto errorDto = ErrorDto.builder().code(e.getCode()).message(e.getMessage()).build();
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = UserAlReadyExistInDb.class)
+    public ResponseEntity<ErrorDto> UserAllReadyExistInDb(UserAlReadyExistInDb e) {
+        ErrorDto errorDto = ErrorDto.builder().code(e.getCode()).message(e.getMessage()).build();
+        return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
